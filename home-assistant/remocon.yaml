@@ -1,0 +1,119 @@
+mqtt:
+  sensor:
+    - name: Elco Outside Temperature
+      unique_id: 'elco_outside_temperature'
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.plantData.outsideTemp }}"
+      unit_of_measurement: "°C"     
+    - name: Elco Domestic Hot Water Storage Temperature
+      unique_id: "elco_domestic_hot_water_storage_temperature"
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.plantData.dhwStorageTemp }}"  
+      unit_of_measurement: "°C" 
+    - name: Elco Domestic Hot Water Temperature
+      unique_id: "elco_domestic_hot_water_temperature"
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.plantData.dhwComfortTemp.value }}"  
+      unit_of_measurement: "°C"
+      json_attributes_topic: "remocon/hvac"
+      json_attributes_template: "{{ value_json.plantData.dhwComfortTemp | tojson }}"
+    - name: Elco Domestic Hot Water Storage Mode
+      icon: mdi:hvac
+      unique_id: "elco_domestic_hot_water_storage_mode"
+      state_topic: "remocon/hvac"
+      value_template: >
+        {%- if value_json.plantData.dhwMode.value | int == 0 -%}
+          Off
+        {%- elif value_json.plantData.dhwMode.value | int == 1 -%}
+          On
+        {%- else -%}
+          Unknown
+        {%- endif -%}      
+    - name: Elco Comfort room Temperature setpoint
+      unique_id: elco_comfort_room_temperature_setpoint
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.zoneData.chComfortTemp.value }}"
+      unit_of_measurement: "°C"
+      json_attributes_topic: "remocon/hvac"
+      json_attributes_template: "{{ value_json.zoneData.chComfortTemp | tojson }}"
+    - name: Elco Reduced room Temperature setpoint
+      unique_id: "elco_reduced_room_temperature_setpoint"
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.zoneData.chReducedTemp.value }}"  
+      unit_of_measurement: "°C"
+      json_attributes_topic: "remocon/hvac"
+      json_attributes_template: "{{ value_json.zoneData.chReducedTemp | tojson }}"
+    - name: Elco Room Temperature
+      unique_id: "elco_room_temperature"
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.zoneData.roomTemp }}"  
+      unit_of_measurement: "°C"  
+    - name: Elco Desired Room Temperature
+      unique_id: "elco_desired_room_temperature"
+      state_topic: "remocon/hvac"
+      value_template: "{{ value_json.zoneData.desiredRoomTemp }}"  
+      unit_of_measurement: "°C"    
+    - name: Elco Room Operation mode heating
+      unique_id: elco_room_operation_mode_heating
+      state_topic: "remocon/hvac"
+      icon: mdi:radiator
+      value_template: >
+        {%- if value_json.zoneData.mode.value | int == 0 -%}
+          Protection
+        {%- elif value_json.zoneData.mode.value | int == 1 -%}
+          Automatic
+        {%- elif value_json.zoneData.mode.value | int == 2 -%}
+          Reduction
+        {%- elif value_json.zoneData.mode.value | int == 3 -%}
+          Comfort
+        {%- else -%}
+          mode Unknown
+        {%- endif -%}
+      json_attributes_topic: "remocon/hvac"
+      json_attributes_template: "{{ value_json.zoneData.mode| tojson }}"
+  
+  binary_sensor:
+    - name: Elco Domestic Hot Water Storage Temperature Error
+      unique_id: elco_domestic_hot_water_storage_temperature_error
+      state_topic: "remocon/hvac"
+      device_class: problem
+      value_template: "{{ value_json.plantData.dhwStorageTempError | bool }}"
+      payload_on: "True"
+      payload_off: "False"
+    - name: Elco Outside Temperature Error
+      unique_id: elco_outside_temperature_error
+      state_topic: "remocon/hvac"
+      device_class: problem
+      value_template: "{{ value_json.plantData.outsideTempError | bool }}"
+      payload_on: "True"
+      payload_off: "False"
+    - name: Elco HeatPump On
+      unique_id: elco_heatpump_on
+      state_topic: "remocon/hvac"
+      device_class: running
+      value_template: "{{ value_json.plantData.heatPumpOn | bool }}"
+      payload_on: "True"
+      payload_off: "False"
+    - name: Elco Domestic Hot Water Enabled
+      unique_id: elco_domestic_hot_water_enabled
+      state_topic: "remocon/hvac"
+      device_class: running
+      value_template: "{{ value_json.plantData.dhwEnabled | bool }}"
+      payload_on: "True"
+      payload_off: "False"
+    - name: Elco Room Heating is Active            
+      unique_id: elco_room_heating_is_active
+      state_topic: "remocon/hvac"
+      icon: mdi:radiator
+      device_class: running      
+      value_template: "{{ value_json.zoneData.isHeatingActive | bool }}"
+      payload_on: "True"
+      payload_off: "False"
+    - name: Elco Room Heating is Request
+      unique_id: elco_room_heat_request
+      state_topic: "remocon/hvac"
+      icon: mdi:radiator
+      device_class: running      
+      value_template: "{{ value_json.zoneData.heatOrCoolRequest | bool }}"
+      payload_on: "True"
+      payload_off: "False"

@@ -1,0 +1,13 @@
+[MQTT]
+host = 192.168.1.50
+port = 1883
+username = ''
+password = ''
+client_name = remocon
+topic = remocon/hvac/
+
+[REMOCON-NET]
+url = https://www.remocon-net.remotethermo.com/
+username = your_email
+password = your_password
+gateway = your_gaterway_id
