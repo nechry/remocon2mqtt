@@ -75,4 +75,4 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('default.cfg')    
     main(config)
-    print("finishing")
+    print("Completed")
