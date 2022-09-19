@@ -28,4 +28,16 @@ It not a service but just a script, you have to schedule it via a crontab for in
 
 I'ts a readonly integration, we can't modify set-point or any parameters on the boiler.
 
+## node-RED way's
+
+You can also use [node-RED](node-RED/flow.json) to query and push to MQTT
+
+![flow node-RED][img2]
+
+
+
+
+
 [img1]: images/thision_s.jpg
+[img2]: images/remocon2mqtt-node-RED.jpg
+
