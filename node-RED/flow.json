@@ -1,0 +1,273 @@
+[
+    {
+        "id": "3efb15ad057b74f7",
+        "type": "inject",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "every hour",
+        "props": [
+            {
+                "p": "headers",
+                "v": "{\"Content-Type\":\"application/x-www-form-urlencoded\",\"Cookie\":\"browserUtcOffset=-120\"}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "v": "gatewayid",
+                "vt": "flow"
+            }
+        ],
+        "repeat": "1800",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "0a24265570c43b4f"
+            ]
+        ]
+    },
+    {
+        "id": "29901ee5e3994c54",
+        "type": "debug",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "cf0234759e474e9d",
+        "type": "function",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "Request zone",
+        "func": "let cookie = msg.headers[\"set-cookie\"];\n\nmsg.headers[\"cookie\"] = cookie.join(\";\");\nmsg.headers[\"accept\"] = 'application/json';\nmsg.headers = msg.headers || {};\nmsg.headers[\"content-type\"] = 'application/json';\n\ndelete msg.statusCode;\ndelete msg.headers[\"cache-control\"]\ndelete msg.headers[\"content-length\"];\ndelete msg.headers[\"keep-alive\"];\ndelete msg.headers.date;\ndelete msg.headers.connection\ndelete msg.headers[\"x-frame-options\"]\ndelete msg.headers[\"x-xss-protection\"]\ndelete msg.headers[\"x-content-type-options\"]\ndelete msg.headers[\"content-security-policy\"]\ndelete msg.headers[\"strict-transport-security\"]\ndelete msg.headers.vary\ndelete msg.payload\ndelete msg.headers[\"x-node-red-request-node\"]\ndelete msg.responseCookies\ndelete msg.redirectList\ndelete msg.retry\ndelete msg.headers[\"set-cookie\"];\ndelete msg.responseUrl\ndelete msg.headers[\"referrer-policy\"]\ndelete msg.headers[\"expect-ct\"]\n\nmsg.cookies = cookie;\n\n\n\nmsg.payload = {\n    \"useCache\": \"true\",\n    \"zone\": \"1\",\n    \"filter\": {\n        \"progIds\": \"null\",\n        \"plant\": \"true\",\n        \"zone\": \"true\"\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 120,
+        "wires": [
+            [
+                "a6ab1a575daf807a"
+            ]
+        ]
+    },
+    {
+        "id": "766e9ad9f0b5c159",
+        "type": "http request",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "Login",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://www.remocon-net.remotethermo.com/R2/Account/Login?returnUrl=HTTP/2",
+        "tls": "649dd486.329ea4",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": true,
+        "headers": [],
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "29901ee5e3994c54",
+                "cf0234759e474e9d"
+            ]
+        ]
+    },
+    {
+        "id": "a6ab1a575daf807a",
+        "type": "http request",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "GetData",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://www.remocon-net.remotethermo.com/R2/PlantHomeBsb/GetData/{{{topic}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 800,
+        "y": 120,
+        "wires": [
+            [
+                "dd5f647eaf374d45"
+            ]
+        ]
+    },
+    {
+        "id": "1a7a7a26c837f06a",
+        "type": "debug",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "cdb74446322fab32",
+        "type": "mqtt out",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "",
+        "topic": "remocon/hvac",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "bafa609.6d26da",
+        "x": 1140,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "dd5f647eaf374d45",
+        "type": "change",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "data",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.data",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 120,
+        "wires": [
+            [
+                "1a7a7a26c837f06a",
+                "cdb74446322fab32"
+            ]
+        ]
+    },
+    {
+        "id": "f14b80395a5d3764",
+        "type": "config",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "",
+        "properties": [
+            {
+                "p": "username",
+                "pt": "flow",
+                "to": "your@email",
+                "tot": "str"
+            },
+            {
+                "p": "password",
+                "pt": "flow",
+                "to": "your_password",
+                "tot": "str"
+            },
+            {
+                "p": "gatewayid",
+                "pt": "flow",
+                "to": "your_gatewayId",
+                "tot": "str"
+            }
+        ],
+        "active": true,
+        "x": 150,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "0a24265570c43b4f",
+        "type": "template",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "login payload",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Email={{flow.username}}&Password={{flow.password}}&RememberMe=false",
+        "output": "str",
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "766e9ad9f0b5c159"
+            ]
+        ]
+    },
+    {
+        "id": "649dd486.329ea4",
+        "type": "tls-config",
+        "name": "Verify server certificate Only",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "bafa609.6d26da",
+        "type": "mqtt-broker",
+        "name": "yourbroker",
+        "broker": "ipbroker",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "nodered/status",
+        "birthQos": "1",
+        "birthRetain": "true",
+        "birthPayload": "Online",
+        "birthMsg": {},
+        "closeTopic": "nodered/status",
+        "closeQos": "1",
+        "closeRetain": "true",
+        "closePayload": "Offline",
+        "closeMsg": {},
+        "willTopic": "nodered/status",
+        "willQos": "1",
+        "willRetain": "true",
+        "willPayload": "Disconnected",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]
