@@ -33,11 +33,9 @@ I'ts a readonly integration, we can't modify set-point or any parameters on the 
 You can also use [node-RED](node-RED/flow.json) to query and push to MQTT
 
 ![flow node-RED][img2]
+## License
 
+[MIT](LICENSE)
 
-
-
-
-[img1]: images/thision_s.jpg
-[img2]: images/remocon2mqtt-node-RED.jpg
-
+[img1]: images/home-assistant-card.jpg
+[img2]: images/node-RED-flow.jpg
