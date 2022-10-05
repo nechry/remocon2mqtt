@@ -60,7 +60,10 @@ You can also use [node-RED](node-RED/flow.json) to query and push to MQTT
 
 ![flow node-RED][img2]
 
-The flow use the node [config](https://flows.nodered.org/node/node-red-contrib-config).
+The flow use the node [credentials](https://flows.nodered.org/node/node-red-contrib-credentials).
+
+Install it before import
+
 ## License
 
 [MIT](LICENSE)
