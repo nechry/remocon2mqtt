@@ -1,5 +1,13 @@
 [
     {
+        "id": "5e9bd31b3e5c9c21",
+        "type": "tab",
+        "label": "Remocon",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "3efb15ad057b74f7",
         "type": "inject",
         "z": "5e9bd31b3e5c9c21",
@@ -9,11 +17,6 @@
                 "p": "headers",
                 "v": "{\"Content-Type\":\"application/x-www-form-urlencoded\",\"Cookie\":\"browserUtcOffset=-120\"}",
                 "vt": "json"
-            },
-            {
-                "p": "topic",
-                "v": "gatewayid",
-                "vt": "flow"
             }
         ],
         "repeat": "1800",
@@ -21,11 +24,11 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 130,
-        "y": 120,
+        "x": 90,
+        "y": 160,
         "wires": [
             [
-                "0a24265570c43b4f"
+                "18608ede324bf1bf"
             ]
         ]
     },
@@ -34,7 +37,7 @@
         "type": "debug",
         "z": "5e9bd31b3e5c9c21",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -42,8 +45,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 590,
-        "y": 60,
+        "x": 810,
+        "y": 100,
         "wires": []
     },
     {
@@ -51,14 +54,14 @@
         "type": "function",
         "z": "5e9bd31b3e5c9c21",
         "name": "Request zone",
-        "func": "let cookie = msg.headers[\"set-cookie\"];\n\nmsg.headers[\"cookie\"] = cookie.join(\";\");\nmsg.headers[\"accept\"] = 'application/json';\nmsg.headers = msg.headers || {};\nmsg.headers[\"content-type\"] = 'application/json';\n\ndelete msg.statusCode;\ndelete msg.headers[\"cache-control\"]\ndelete msg.headers[\"content-length\"];\ndelete msg.headers[\"keep-alive\"];\ndelete msg.headers.date;\ndelete msg.headers.connection\ndelete msg.headers[\"x-frame-options\"]\ndelete msg.headers[\"x-xss-protection\"]\ndelete msg.headers[\"x-content-type-options\"]\ndelete msg.headers[\"content-security-policy\"]\ndelete msg.headers[\"strict-transport-security\"]\ndelete msg.headers.vary\ndelete msg.payload\ndelete msg.headers[\"x-node-red-request-node\"]\ndelete msg.responseCookies\ndelete msg.redirectList\ndelete msg.retry\ndelete msg.headers[\"set-cookie\"];\ndelete msg.responseUrl\ndelete msg.headers[\"referrer-policy\"]\ndelete msg.headers[\"expect-ct\"]\n\nmsg.cookies = cookie;\n\n\n\nmsg.payload = {\n    \"useCache\": \"true\",\n    \"zone\": \"1\",\n    \"filter\": {\n        \"progIds\": \"null\",\n        \"plant\": \"true\",\n        \"zone\": \"true\"\n    }\n};\n\nreturn msg;",
+        "func": "let cookie = msg.headers[\"set-cookie\"];\n\nmsg.headers[\"cookie\"] = cookie.join(\";\");\nmsg.headers[\"accept\"] = 'application/json';\nmsg.headers = msg.headers || {};\nmsg.headers[\"content-type\"] = 'application/json';\n\n\n\ndelete msg.statusCode;\ndelete msg.headers[\"cache-control\"]\ndelete msg.headers[\"content-length\"];\ndelete msg.headers[\"keep-alive\"];\ndelete msg.headers.date;\ndelete msg.headers.connection\ndelete msg.headers[\"x-frame-options\"]\ndelete msg.headers[\"x-xss-protection\"]\ndelete msg.headers[\"x-content-type-options\"]\ndelete msg.headers[\"content-security-policy\"]\ndelete msg.headers[\"strict-transport-security\"]\ndelete msg.headers.vary\ndelete msg.payload\ndelete msg.headers[\"x-node-red-request-node\"]\ndelete msg.responseCookies\ndelete msg.redirectList\ndelete msg.retry\ndelete msg.headers[\"set-cookie\"];\ndelete msg.responseUrl\ndelete msg.headers[\"referrer-policy\"]\ndelete msg.headers[\"expect-ct\"]\n\nmsg.cookies = cookie;\n\n\n\nmsg.payload = {\n    \"useCache\": \"true\",\n    \"zone\": \"1\",\n    \"filter\": {\n        \"progIds\": \"null\",\n        \"plant\": \"true\",\n        \"zone\": \"true\"\n    }\n};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 120,
+        "x": 840,
+        "y": 160,
         "wires": [
             [
                 "a6ab1a575daf807a"
@@ -81,8 +84,8 @@
         "authType": "",
         "senderr": true,
         "headers": [],
-        "x": 450,
-        "y": 120,
+        "x": 690,
+        "y": 160,
         "wires": [
             [
                 "29901ee5e3994c54",
@@ -98,7 +101,7 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "https://www.remocon-net.remotethermo.com/R2/PlantHomeBsb/GetData/{{{topic}}}",
+        "url": "https://www.remocon-net.remotethermo.com/R2/PlantHomeBsb/GetData/{{{gatewayid}}}",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -106,8 +109,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 800,
-        "y": 120,
+        "x": 1000,
+        "y": 160,
         "wires": [
             [
                 "dd5f647eaf374d45"
@@ -127,8 +130,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1130,
-        "y": 60,
+        "x": 1290,
+        "y": 100,
         "wires": []
     },
     {
@@ -145,8 +148,8 @@
         "correl": "",
         "expiry": "",
         "broker": "bafa609.6d26da",
-        "x": 1140,
-        "y": 120,
+        "x": 1300,
+        "y": 160,
         "wires": []
     },
     {
@@ -168,44 +171,14 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 950,
-        "y": 120,
+        "x": 1130,
+        "y": 160,
         "wires": [
             [
                 "1a7a7a26c837f06a",
                 "cdb74446322fab32"
             ]
         ]
-    },
-    {
-        "id": "f14b80395a5d3764",
-        "type": "config",
-        "z": "5e9bd31b3e5c9c21",
-        "name": "",
-        "properties": [
-            {
-                "p": "username",
-                "pt": "flow",
-                "to": "your@email",
-                "tot": "str"
-            },
-            {
-                "p": "password",
-                "pt": "flow",
-                "to": "your_password",
-                "tot": "str"
-            },
-            {
-                "p": "gatewayid",
-                "pt": "flow",
-                "to": "your_gatewayId",
-                "tot": "str"
-            }
-        ],
-        "active": true,
-        "x": 150,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "0a24265570c43b4f",
@@ -216,10 +189,57 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "Email={{flow.username}}&Password={{flow.password}}&RememberMe=false",
+        "template": "Email={{{username}}}&Password={{{password}}}&RememberMe=false",
         "output": "str",
-        "x": 300,
-        "y": 120,
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "2ff2f18f2e4b2021"
+            ]
+        ]
+    },
+    {
+        "id": "18608ede324bf1bf",
+        "type": "credentials",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "Remocon Auth",
+        "props": [
+            {
+                "value": "username",
+                "type": "msg"
+            },
+            {
+                "value": "password",
+                "type": "msg"
+            },
+            {
+                "value": "gatewayid",
+                "type": "msg"
+            }
+        ],
+        "credentials": {},
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "0a24265570c43b4f"
+            ]
+        ]
+    },
+    {
+        "id": "2ff2f18f2e4b2021",
+        "type": "function",
+        "z": "5e9bd31b3e5c9c21",
+        "name": "clean",
+        "func": "delete msg.username;\ndelete msg.password;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 160,
         "wires": [
             [
                 "766e9ad9f0b5c159"
@@ -243,8 +263,8 @@
     {
         "id": "bafa609.6d26da",
         "type": "mqtt-broker",
-        "name": "yourbroker",
-        "broker": "ipbroker",
+        "name": "",
+        "broker": "",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
