@@ -69,4 +69,4 @@ Install it before import
 [MIT](LICENSE)
 
 [img1]: images/home-assistant-card.png
-[img2]: images/node-RED-flow.jpg
+[img2]: images/node-RED-flow.png
