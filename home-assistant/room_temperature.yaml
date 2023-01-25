@@ -47,3 +47,4 @@ footer:
   entity: sensor.elco_room_temperature
   hours_to_show: 48
   detail: 2
+  
