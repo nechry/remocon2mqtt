@@ -117,59 +117,40 @@ For more details about package usage check the [Packages folder documentation](h
 
 I build a simple dashboard with the following 3 cards definition:
 
+#### Room temperature
+
 To display the room temperature, the desired temperature, the operation mode and the heating status.
 
-Just copy the [yaml](home-assistant/room_temperature.yaml) and paste it in `Manual card`.
+Just copy the [yaml](home-assistant/room_temperature.yaml) code and paste it in `Manual card`.
 
-## Code block
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/room_temperature.yaml) -->
-<!-- The below code snippet is automatically added from ./home-assistant/room_temperature.yaml -->
 ```js
 alert('This code is automatically added to .md')
 alert('awesome!')
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
-To display the domestic hot water temperature, just copy the [yaml](home-assistant/domestic_hot_water.yaml) and paste it in `Manual card`.
 
-```yaml:home-assistant/domestic_hot_water.yaml
-type: entities
-entities:
-  - entity: sensor.elco_domestic_hot_water_storage_mode
-    name: Storage Mode
-  - entity: binary_sensor.elco_domestic_hot_water_enabled
-    name: Enabled
-    secondary_info: none
-  - entity: sensor.elco_domestic_hot_water_temperature
-    name: Temperature
-    secondary_info: none
-  - entity: sensor.elco_domestic_hot_water_storage_temperature
-    name: Storage Temperature
-    secondary_info: last-changed
-title: Domestic Hot Water
-state_color: true
-footer:
-  type: graph
-  entity: sensor.elco_domestic_hot_water_storage_temperature
-  detail: 1
+#### Domestic hot water
+
+To display the domestic hot water temperature, just copy the [yaml](home-assistant/domestic_hot_water.yaml) code and paste it in `Manual card`.
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/domestic_hot_water.yaml) -->
+```js
+alert('This code is automatically added to .md')
+alert('awesome!')
 ```
+<!-- MARKDOWN-AUTO-DOCS:END -->
 
-And finally to display the boiler status, just copy the [yaml](home-assistant/boiler_status.yaml) and paste it in `Manual card`.
+#### Boiler status
 
-```yaml:home-assistant/boiler_status.yaml
-type: entities
-entities:
-  - entity: binary_sensor.elco_heatpump_on
-    name: Heat Pump
-  - entity: binary_sensor.elco_outside_temperature_error
-    name: Outside Temperature Error
-  - entity: binary_sensor.elco_domestic_hot_water_storage_temperature_error
-    name: Domestic Hot Water Storage Temperature Error
-title: THISION S 14.2 Status
-state_color: true
-footer:
-  type: graph
-  entity: sensor.elco_outside_temperature
+And finally to display the boiler status, just copy the [yaml](home-assistant/boiler_status.yaml) code and paste it in `Manual card`.
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/boiler_status.yaml) -->
+```js
+alert('This code is automatically added to .md')
+alert('awesome!')
 ```
+<!-- MARKDOWN-AUTO-DOCS:END -->
 
 ## Limitation
 
