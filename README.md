@@ -7,7 +7,7 @@ Two way's to get data from your Elco Remocon-Net boiler system, published on MQT
 ## Description
 
 I initially wrote a python script to get data from my boiler system and forward then to a MQTT broker.
-Than I found a easy way to install, debug and share with a node-RED flow.
+Than I found a easy way to install, debug and share with Home-Assistant community via a node-RED flow.
 
 ## Setup
 
