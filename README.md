@@ -124,6 +124,7 @@ To display the room temperature, the desired temperature, the operation mode and
 Just copy the [yaml](home-assistant/room_temperature.yaml) code and paste it in `Manual card`.
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/room_temperature.yaml) -->
+<!-- The below code snippet is automatically added from ./home-assistant/room_temperature.yaml -->
 ```js
 alert('This code is automatically added to .md')
 alert('awesome!')
