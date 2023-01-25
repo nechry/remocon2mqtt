@@ -121,9 +121,14 @@ To display the room temperature, the desired temperature, the operation mode and
 
 Just copy the [yaml](home-assistant/room_temperature.yaml) and paste it in `Manual card`.
 
+## Code block
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/room_temperature.yaml) -->
+<!-- The below code snippet is automatically added from ./home-assistant/room_temperature.yaml -->
+```js
+alert('This code is automatically added to .md')
+alert('awesome!')
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
-
 To display the domestic hot water temperature, just copy the [yaml](home-assistant/domestic_hot_water.yaml) and paste it in `Manual card`.
 
 ```yaml:home-assistant/domestic_hot_water.yaml
