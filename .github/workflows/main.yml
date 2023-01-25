@@ -1,7 +1,7 @@
 name: Embed code in README
 
 on:
-  pull_request:
+  push:
     branches:
       - master
   workflow_dispatch: # Allow manual trigger
