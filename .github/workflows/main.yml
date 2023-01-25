@@ -2,23 +2,27 @@ name: Embed code in README
 
 on:
   push:
-    branches:
-      - master
+    paths:
+      - '**.yaml'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
   embed-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Markdown autodocs
+        uses: dineshsonachalam/markdown-autodocs@v1.0.7
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-          
+          # Optional, defaults to author of the commit that triggered the run
+          commit_author: Author nechry@gmail.com
 
-      - uses: cgalliva/markdown-embed-code@v1.0.1
-        with:
-          markdown: "README.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          message: "synchronizing Readme"
-          silent: true
+          # Optional, defaults to "actions@github.com"
+          commit_user_email: actions@github.com
+
+          # Optional, but recommended
+          # Defaults to "Apply automatic changes"
+          commit_message: Apply automatic changes
+
+          # Optional output file paths, defaults to '[./README.md]'.
+          output_file_paths: '[./README.md]'
+
