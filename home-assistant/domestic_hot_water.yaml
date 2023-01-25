@@ -1,0 +1,19 @@
+type: entities
+entities:
+  - entity: sensor.elco_domestic_hot_water_storage_mode
+    name: Storage Mode
+  - entity: binary_sensor.elco_domestic_hot_water_enabled
+    name: Enabled
+    secondary_info: none
+  - entity: sensor.elco_domestic_hot_water_temperature
+    name: Temperature
+    secondary_info: none
+  - entity: sensor.elco_domestic_hot_water_storage_temperature
+    name: Storage Temperature
+    secondary_info: last-changed
+title: Domestic Hot Water
+state_color: true
+footer:
+  type: graph
+  entity: sensor.elco_domestic_hot_water_storage_temperature
+  detail: 1

@@ -1,0 +1,13 @@
+type: entities
+entities:
+  - entity: binary_sensor.elco_heatpump_on
+    name: Heat Pump
+  - entity: binary_sensor.elco_outside_temperature_error
+    name: Outside Temperature Error
+  - entity: binary_sensor.elco_domestic_hot_water_storage_temperature_error
+    name: Domestic Hot Water Storage Temperature Error
+title: THISION S 14.2 Status
+state_color: true
+footer:
+  type: graph
+  entity: sensor.elco_outside_temperature
