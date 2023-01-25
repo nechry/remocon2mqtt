@@ -16,9 +16,3 @@ jobs:
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
           ref: refs/heads/${{ github.head_ref }}
 
-      - uses: cgalliva/markdown-embed-code@v1.0.1
-        with:
-          markdown: "README.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          message: "synchronizing Readme"
-          silent: true
