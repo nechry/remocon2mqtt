@@ -124,9 +124,56 @@ Just copy the [yaml](home-assistant/room_temperature.yaml) and paste it in `Manu
 ## Code block
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/room_temperature.yaml) -->
 <!-- The below code snippet is automatically added from ./home-assistant/room_temperature.yaml -->
-```js
-alert('This code is automatically added to .md')
-alert('awesome!')
+```yaml
+type: entities
+entities:
+  - entity: sensor.elco_room_temperature
+    name: Current room temperature
+    secondary_info: last-changed
+  - entity: sensor.elco_desired_room_temperature
+    name: Desired temperature
+    secondary_info: last-changed
+    type: custom:multiple-entity-row
+    show_state: true
+    entities:
+      - entity: sensor.elco_reduced_room_temperature_setpoint
+        name: Reduced
+      - entity: sensor.elco_comfort_room_temperature_setpoint
+        name: Comfort
+      - entity: sensor.elco_outside_temperature
+        name: Outside
+  - entity: sensor.elco_room_operation_mode_heating
+    name: Operation mode heating
+    secondary_info: last-updated
+  - entity: binary_sensor.elco_room_heating_is_active
+    type: custom:uptime-card
+    title_template: Heating
+    hours_to_show: 48
+    status_adaptive_color: true
+    alias:
+      ok: Active
+      ko: Idle
+    show:
+      footer: false
+  - entity: binary_sensor.elco_room_heating_is_request
+    type: custom:uptime-card
+    title_template: Heating
+    hours_to_show: 48
+    status_adaptive_color: true
+    alias:
+      ok: Request
+      ko: Idle
+    show:
+      footer: false
+      title: false
+      icon: false
+title: Home
+state_color: true
+footer:
+  type: graph
+  entity: sensor.elco_room_temperature
+  hours_to_show: 48
+  detail: 2
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 To display the domestic hot water temperature, just copy the [yaml](home-assistant/domestic_hot_water.yaml) and paste it in `Manual card`.
