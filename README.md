@@ -139,7 +139,7 @@ And finally to display the boiler status, just copy the [yaml](home-assistant/bo
 
 ## Limitation
 
-I'ts a readonly integration, we can't modify set-point or any parameters on the boiler.
+I'ts a readonly integration, we can't modify set-point or any parameters on the boiler, just read.
 
 ## License
 
