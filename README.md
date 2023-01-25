@@ -125,9 +125,56 @@ Just copy the [yaml](home-assistant/room_temperature.yaml) code and paste it in 
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/room_temperature.yaml) -->
 <!-- The below code snippet is automatically added from ./home-assistant/room_temperature.yaml -->
-```js
-alert('This code is automatically added to .md')
-alert('awesome!')
+```yaml
+type: entities
+entities:
+  - entity: sensor.elco_room_temperature
+    name: Current room temperature
+    secondary_info: last-changed
+  - entity: sensor.elco_desired_room_temperature
+    name: Desired temperature
+    secondary_info: last-changed
+    type: custom:multiple-entity-row
+    show_state: true
+    entities:
+      - entity: sensor.elco_reduced_room_temperature_setpoint
+        name: Reduced
+      - entity: sensor.elco_comfort_room_temperature_setpoint
+        name: Comfort
+      - entity: sensor.elco_outside_temperature
+        name: Outside
+  - entity: sensor.elco_room_operation_mode_heating
+    name: Operation mode heating
+    secondary_info: last-updated
+  - entity: binary_sensor.elco_room_heating_is_active
+    type: custom:uptime-card
+    title_template: Heating
+    hours_to_show: 48
+    status_adaptive_color: true
+    alias:
+      ok: Active
+      ko: Idle
+    show:
+      footer: false
+  - entity: binary_sensor.elco_room_heating_is_request
+    type: custom:uptime-card
+    title_template: Heating
+    hours_to_show: 48
+    status_adaptive_color: true
+    alias:
+      ok: Request
+      ko: Idle
+    show:
+      footer: false
+      title: false
+      icon: false
+title: Home
+state_color: true
+footer:
+  type: graph
+  entity: sensor.elco_room_temperature
+  hours_to_show: 48
+  detail: 2
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
@@ -136,9 +183,27 @@ alert('awesome!')
 To display the domestic hot water temperature, just copy the [yaml](home-assistant/domestic_hot_water.yaml) code and paste it in `Manual card`.
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/domestic_hot_water.yaml) -->
-```js
-alert('This code is automatically added to .md')
-alert('awesome!')
+<!-- The below code snippet is automatically added from ./home-assistant/domestic_hot_water.yaml -->
+```yaml
+type: entities
+entities:
+  - entity: sensor.elco_domestic_hot_water_storage_mode
+    name: Storage Mode
+  - entity: binary_sensor.elco_domestic_hot_water_enabled
+    name: Enabled
+    secondary_info: none
+  - entity: sensor.elco_domestic_hot_water_temperature
+    name: Temperature
+    secondary_info: none
+  - entity: sensor.elco_domestic_hot_water_storage_temperature
+    name: Storage Temperature
+    secondary_info: last-changed
+title: Domestic Hot Water
+state_color: true
+footer:
+  type: graph
+  entity: sensor.elco_domestic_hot_water_storage_temperature
+  detail: 1
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
@@ -147,9 +212,21 @@ alert('awesome!')
 And finally to display the boiler status, just copy the [yaml](home-assistant/boiler_status.yaml) code and paste it in `Manual card`.
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./home-assistant/boiler_status.yaml) -->
-```js
-alert('This code is automatically added to .md')
-alert('awesome!')
+<!-- The below code snippet is automatically added from ./home-assistant/boiler_status.yaml -->
+```yaml
+type: entities
+entities:
+  - entity: binary_sensor.elco_heatpump_on
+    name: Heat Pump
+  - entity: binary_sensor.elco_outside_temperature_error
+    name: Outside Temperature Error
+  - entity: binary_sensor.elco_domestic_hot_water_storage_temperature_error
+    name: Domestic Hot Water Storage Temperature Error
+title: THISION S 14.2 Status
+state_color: true
+footer:
+  type: graph
+  entity: sensor.elco_outside_temperature
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
