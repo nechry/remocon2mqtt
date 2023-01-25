@@ -1,28 +1,23 @@
-name: Embed code in README
+name: markdown-autodocs
 
 on:
   push:
     paths:
       - '**.yaml'
   workflow_dispatch: # Allow manual trigger
+  
+  workflow_run:
+    workflows:
+      - generate-artifacts
+    types:
+      - completed
 
-jobs:
-  embed-code:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Markdown autodocs
-        uses: dineshsonachalam/markdown-autodocs@v1.0.7
-        with:
-          # Optional, defaults to author of the commit that triggered the run
-          commit_author: Author nechry@gmail.com
-
-          # Optional, defaults to "actions@github.com"
-          commit_user_email: actions@github.com
-
-          # Optional, but recommended
-          # Defaults to "Apply automatic changes"
-          commit_message: Apply automatic changes
-
-          # Optional output file paths, defaults to '[./README.md]'.
-          output_file_paths: '[./README.md]'
-
+jobs:        
+  auto-update-readme:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Markdown autodocs
+          uses: dineshsonachalam/markdown-autodocs@v1.0.7
+          with:
+            output_file_paths: '[./README.md]'
