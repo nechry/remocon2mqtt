@@ -178,6 +178,10 @@ footer:
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
+This card use the custom component [multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row) available on [HACS](https://hacs.xyz/), you need to install before.
+
+
+
 #### Domestic hot water
 
 To display the domestic hot water temperature, just copy the [yaml](home-assistant/domestic_hot_water.yaml) code and paste it in `Manual card`.
