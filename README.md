@@ -4,6 +4,8 @@ Two way's to get data from your Elco Remocon-Net boiler system, published on MQT
 
 ![Thision S Dashboard][img1]
 
+The Repo is now *DEPRECATED* in favor of the [ELCO Remocon.net AppDaemon app](https://github.com/nechry/elco-remocon-net-appdaemon)
+
 ## Description
 
 I initially wrote a python script to get data from my boiler system and forward then to a MQTT broker.
